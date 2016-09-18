@@ -1,13 +1,21 @@
 <!doctype html>
-<html>
+<html lang="ja">
+
 	<head>
 		<meta charset="utf-8">
+
+		<title>Re:ゼロからはじめる開発環境構築</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
-
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/beige.css" id="theme">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -20,125 +28,187 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
 	</head>
+
 	<body>
+
 		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section data-markdown
-					data-separator="^\n>>>\n"
-					data-separator-vertical="^\n---\n"
-					data-separator-notes="^Note:">
-					<script type="text/template">
-## Re:ゼロから始める開発環境構築
-
->>>
-
-## テーマ
-
-- 楽してチームで利用する開発環境を構築しよう
-
->>>
-
-### チーム開発において<br/>利用したいツールは割と沢山ある
-
->>>
-
-## 開発で利用したいツール
-
-- 課題管理
-- 資材管理
-- 情報共有
-- コミュニケーションツール
-- レビュー管理
-
->>>
-
-## これまで
-
-- サーバ用意
-- OSインストール
-- アプリインストール
-- 準備完了
-- アプリ起動。利用開始！
-
->>>
-
-## ただ、問題があると？
-
->>>
-
-## 問題があると...
-
-- サーバ用意
-- OSインストール
-- アプリインストール
-- 準備かんry..エラー？
-- はぁ？ミドルウェアのバージョンが違って動かない？
-- めんど...
-
->>>
-
-## <span style="text-transform:none;">そうだ。Dockerにしよう</span>
-
-(Dockerはコンテナを利用した仮想化ツールです)
-
->>>
-
-## <span style="text-transform:none;">Dockerは何がうれしいの？</span>
-
-- 環境構築の自動化が比較的簡単
-- 変更履歴管理が不要
-- インフラ構成をGitHubなどのコードリポジトリで管理できる
-
->>>
-
-## <span style="text-transform:none;">Dockerを利用した場合</span>
-
-- Dockerのインストール
-- コンテナ起動
-- サービス利用開始！
-
->>>
-
-## 起動するサービス
-(変更の可能性あり)
-
-- LDAP
-- Redmine
-- GitLab
-- Rocket.Chat
-- Jenkins
-- ownCloud
-
->>>
-
-## OSSの利用でプロジェクトの<br/>スタートアップ速度を上げよう
-
->>>
-
-## プルリク大歓迎
-https://github.com/cxpqwvtj/dev-env-docker-compose
-					</script>
+				<section>
+					<h2>Re:ゼロからはじめる開発環境構築</h2>
+					<h3>The Automation Tool</h3>
+					<p>
+						<!-- <small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small> -->
+						<small>Created by Fukuda / Tenma</small>
+					</p>
 				</section>
+
+				<section>
+					<h2>Agenda</h2>
+					<ul>
+						<li>前置き</li>
+						<li>これまでは</li>
+						<li>自動化しよう!!</li>
+						<li>こんなの作りました</li>
+						<li>機能一覧</li>
+						<li>dockerとは</li>
+						<li>dockerを使うメリット</li>
+						<li>今後の課題</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>前置き</h2>
+						<p>みなさま、チームで開発をしていく上でどのようなツールをお使いでしょうか？</p>
+						<p>課題管理、進捗管理、資材管理、情報共有・・・</p>
+						<p>ツールを使用したい場面は多く、その環境を構築するには時間がかかるものです。</p>
+				</section>
+
+				<section>
+					<h2>これまでは</h2>
+					<ol>
+						<li>サーバ用意</li>
+						<li>OSインストール</li>
+						<li>アプリインストール</li>
+						<li>準備完了</li>
+						<li>アプリ起動。利用開始</li>
+					</ol>
+				</section>
+
+				<section>
+					<section id="fragments">
+						<h2>これ・・・面倒ですよね？</h2>
+						<p class="fragment">設定ミスって起動しないですよね？</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>自動化しよう!!</h2>
+						<p>自動化には様々なメリットがあります。</p>
+						<ul>
+							<li>時短できる</li>
+							<li>人的ミスがなくなる</li>
+							<li>同じ環境を何個も作れる</li>
+							<li>周りの目が変わる<span style="color:red">(かも)</span></li>
+						</ul>
+				</section>
+
+				<section>
+					<h2>つまり・・・</h2>
+						<p>自動化することで作業効率が上がり、<span style="color:red">確実に</span>コスト削減できます。</p>
+				</section>
+
+				<section>
+					<h2>こんなの作りました</h2>
+						<p>コマンド一つで👇のツールを起動します</p>
+						<ul>
+							<li>Redmine / プロジェクト管理</li>
+							<li>GitLab / バージョン管理</li>
+							<li>RocketChat / コミュニケーション</li>
+							<li>Jenkins / CI</li>
+							<li>ownCloud / ファイル共有</li>
+						</ul>
+				</section>
+
+				<section>
+					<h2>機能一覧</h2>
+						<ul>
+							<li>ツール間で連携します</li>
+							<li>定期的にバックアップします</li>
+							<li>アカウント情報の共有(一つのアカウントで全てのツールを利用)</li>
+							<li>使いやすいプラグインを入れた状態で起動します</li>
+						</ul>
+				</section>
+
+				<section>
+					<h2>使い方は簡単!!</h2>
+					<ol>
+						<li>Dockerをインストール</li>
+						<li>Dockerのネットワーク作成</li>
+						<pre><code class="hljs">$docker network create reverse_proxy</code></pre>
+						<pre><code class="hljs">$docker network create backbone</code></pre>
+						<li>start-all-service.shを実行</li>
+						<pre><code class="hljs">$./start-all-service.sh</code></pre>
+						<li>http://localhostにアクセス</li>
+					</ol>
+				</section>
+
+				<section>
+					<h2>dockerとは</h2>
+					  <p>この自動化ツールは<a href="https://www.docker.com/">docker</a>を使用しており、docker上で動きます</p>
+						<p>dockerとはコンテナ型仮想化を実現するOSSです</p>
+						<figure id="docker-img">
+							<img src="docker.jpg" width="400" height="300" border="0" alt="イメージ図">
+              <figcaption>自動化ツール構築イメージ</figcaption>
+            </figure>
+				</section>
+
+				<section>
+					<h2>dockerを使うメリット</h2>
+						<ul>
+							<li>マシンにdockerが入っていれば、どのOS上でも動く</li>
+							<li>それぞれのツールはコンテナと呼ばれる隔離領域で動くので、ホストとなるマシンを汚さない</li>
+							<li>dockerコンテナは捨てたり、再作成したりが簡単にできる</li>
+							<li>自動化の内容はdockerfileにコードで記述できるので、パッケージングが容易</li>
+							<li>Windows Server 2016で採用されるなど、勢いがある</li>
+						</ul>
+				</section>
+
+				<section>
+					<h2>今後の課題</h2>
+						<ul>
+							<li>コマンドではなく、画面から操作可能にする</li>
+							<li>各サービスへのアクセスを、「http(s)://hostname/projectname/redmine」のようにする</li>
+						</ul>
+				</section>
+
+				<section style="text-align: left;">
+					<h1>THE END</h1>
+					<p>
+						- <a href="https://github.com/cxpqwvtj/dev-env-docker-compose">Source code &amp; documentation</a>
+					</p>
+				</section>
+
 			</div>
+
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
 
 		<script>
+
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
+				controls: true,
+				progress: true,
 				history: true,
+				center: true,
+		    slideNumber: true,               // 右下にスライドのページ番号を表示
+		    overview: true,                 // Escで表示できる「概要」ページを表示不可にする
+		    touch: true,                    // タッチ操作を無効化
+		    loop: false,                      // スライドをループさせる
+		    rtl: false,                       // 右から左へのスライド
+		    mouseWheel: true,                // マウスのホイールによるスライドを可能にする
+		    transition: 'convex',              // キューブ状の transition でスライドを動作させる
 
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
 				]
 			});
+
 		</script>
+
 	</body>
 </html>
