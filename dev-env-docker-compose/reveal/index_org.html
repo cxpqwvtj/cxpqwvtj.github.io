@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown
+					data-separator="^\n>>>\n"
+					data-separator-vertical="^\n---\n"
+					data-separator-notes="^Note:">
+					<script type="text/template">
+## Re:ゼロから始める開発環境構築
+
+>>>
+
+## テーマ
+
+- 楽してチームで利用する開発環境を構築しよう
+
+>>>
+
+### チーム開発において<br/>利用したいツールは割と沢山ある
+
+>>>
+
+## 開発で利用したいツール
+
+- 課題管理
+- 資材管理
+- 情報共有
+- コミュニケーションツール
+- レビュー管理
+
+>>>
+
+## これまで
+
+- サーバ用意
+- OSインストール
+- アプリインストール
+- 準備完了
+- アプリ起動。利用開始！
+
+>>>
+
+## ただ、問題があると？
+
+>>>
+
+## 問題があると...
+
+- サーバ用意
+- OSインストール
+- アプリインストール
+- 準備かんry..エラー？
+- はぁ？ミドルウェアのバージョンが違って動かない？
+- めんど...
+
+>>>
+
+## <span style="text-transform:none;">そうだ。Dockerにしよう</span>
+
+(Dockerはコンテナを利用した仮想化ツールです)
+
+>>>
+
+## <span style="text-transform:none;">Dockerは何がうれしいの？</span>
+
+- 環境構築の自動化が比較的簡単
+- 変更履歴管理が不要
+- インフラ構成をGitHubなどのコードリポジトリで管理できる
+
+>>>
+
+## <span style="text-transform:none;">Dockerを利用した場合</span>
+
+- Dockerのインストール
+- コンテナ起動
+- サービス利用開始！
+
+>>>
+
+## 起動するサービス
+(変更の可能性あり)
+
+- LDAP
+- Redmine
+- GitLab
+- Rocket.Chat
+- Jenkins
+- ownCloud
+
+>>>
+
+## OSSの利用でプロジェクトの<br/>スタートアップ速度を上げよう
+
+>>>
+
+## プルリク大歓迎
+https://github.com/cxpqwvtj/dev-env-docker-compose
+					</script>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
